@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_width">0dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
+    <dimen name="image_margin">16dp</dimen>
+    <dimen name="image_contact_list_size">64dp</dimen>
+    <dimen name="image_contact_details_size">128dp</dimen>
+    <dimen name="contact_name_title_text_size">20sp</dimen>
+    <dimen name="frame_guideline_size">16dp</dimen>
+    <dimen name="distance_between_cards">4dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+</resources>
