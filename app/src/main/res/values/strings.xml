@@ -5,4 +5,7 @@
     <string name="contact_image_description">Contact image</string>
     <string name="contact_details_toolbar_title">Contact details</string>
     <string name="contact_list_toolbar_title">Contact list</string>
+    <string name="contact_service_description">
+        This service loads contact data from a database
+    </string>
 </resources>
