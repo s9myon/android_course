@@ -1,6 +1,8 @@
 package com.shudss00.android_course
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ class ContactListFragment : Fragment() {
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
     private var listener: ContactAdapter.OnContactClickListener? = null
+    private var contactService: IContactService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,20 +26,39 @@ class ContactListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentContactListBinding.inflate(inflater, container, false)
-        with(binding.list) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ContactAdapter(contactsList, listener)
-        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        contactService = context as IContactService
+        contactService?.getContactList(resultListener)
         requireActivity().apply {
             title = getString(R.string.contact_list_toolbar_title)
         }
-        return binding.root
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    interface ContactsLoadListener {
+        fun onLoaded(contacts: List<Contact>)
+    }
+
+    private val resultListener = object : ContactsLoadListener {
+        override fun onLoaded(contacts: List<Contact>) {
+            Handler(Looper.getMainLooper()).apply {
+                postAtFrontOfQueue {
+                    with(binding.list) {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = ContactAdapter(contacts, listener)
+                    }
+                }
+            }
+        }
     }
 }
