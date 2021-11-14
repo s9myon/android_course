@@ -1,5 +1,8 @@
 package com.shudss00.android_course
 
+import java.util.Calendar
+import java.util.GregorianCalendar
+
 data class Contact(
         val name: String,
         val phoneNumber: String,
@@ -7,7 +10,8 @@ data class Contact(
         val email: String,
         val extraEmail: String,
         val img: String,
-        val description: String
+        val description: String,
+        val dayOfBirth: Calendar
     ) {
     val id: Int = countOfContacts++
 
@@ -24,7 +28,8 @@ val contactsList = listOf(
         email = "musk0@mail.com",
         extraEmail = "musk1@mail.com",
         img = "https://goo.su/8dk1",
-        description = "Genius"
+        description = "Genius",
+        dayOfBirth = GregorianCalendar(1971, Calendar.JULY, 28)
     ),
     Contact(
         name = "Anonymous",
@@ -33,7 +38,8 @@ val contactsList = listOf(
         email = "nymus@mail.com",
         extraEmail = "anony@mail.com",
         img = "https://goo.su/8DJZ",
-        description = "yoli pali"
+        description = "yoli pali",
+        dayOfBirth = GregorianCalendar(1999, Calendar.NOVEMBER, 20)
     ),
     Contact(
         name = "Android",
@@ -42,7 +48,8 @@ val contactsList = listOf(
         email = "andrey7@mail.com",
         extraEmail = "droid@mail.com",
         img = "https://goo.su/8dk6",
-        description = "Boss"
+        description = "Boss",
+        dayOfBirth = GregorianCalendar(2008, Calendar.SEPTEMBER, 23)
     ),
     Contact(
         name = "Homer Simpson",
@@ -51,7 +58,8 @@ val contactsList = listOf(
         email = "homer@mail.com",
         extraEmail = "simpson@mail.com",
         img = "https://goo.su/8dKa",
-        description = "I want to eat pelmeny"
+        description = "I want to eat pelmeny",
+        dayOfBirth = GregorianCalendar(1971, Calendar.JULY, 28)
     ),
     Contact(
         name = "God",
@@ -60,7 +68,8 @@ val contactsList = listOf(
         email = "iisus@paradise.com",
         extraEmail = "hristos@mail.com",
         img = "https://goo.su/8dkC",
-        description = "Creator"
+        description = "Creator",
+        dayOfBirth = GregorianCalendar(1956, Calendar.MAY, 12)
     ),
     Contact(
         name = "Papich",
@@ -69,6 +78,7 @@ val contactsList = listOf(
         email = "vitaly@mail.com",
         extraEmail = "cal@mail.com",
         img = "https://goo.su/8dSp",
-        description = "Ya ne ponimay"
+        description = "Ya ne ponimay",
+        dayOfBirth = GregorianCalendar(1990, Calendar.NOVEMBER, 19)
     )
 )
