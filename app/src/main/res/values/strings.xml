@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android_course</string>
+    <string name="app_name">Contact App</string>
     <string name="phone_number_button_name">add phone number</string>
     <string name="email_button_name">add email</string>
     <string name="contact_image_description">Contact image</string>
@@ -7,5 +7,14 @@
     <string name="contact_list_toolbar_title">Contact list</string>
     <string name="contact_service_description">
         This service loads contact data from a database
+    </string>
+    <string name="notify_button_turn_on">turn on notify</string>
+    <string name="notify_button_turn_off">turn off notify</string>
+    <string name="date_of_birth_title">date of birth:</string>
+    <string name="notification_channel_id">
+        BIRTHDAY_NOTIFICATION_OF_CONTACT_APP
+    </string>
+    <string name="notification_channel_name">
+        Contacts app notification channel
     </string>
 </resources>
