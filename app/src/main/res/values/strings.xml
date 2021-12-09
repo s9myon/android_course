@@ -17,4 +17,11 @@
     <string name="notification_channel_name">
         Contacts app notification channel
     </string>
+    <string name="phone_number_one_title">Tel. 1: </string>
+    <string name="phone_number_two_title">Tel. 2: </string>
+    <string name="email_one_title">Email 1:</string>
+    <string name="email_two_title">Email 2:</string>
+    <string name="requires_set_permissions">Требуется установить разрешения</string>
+    <string name="birthday_notify_action">birthdayNotifyAction</string>
+    <string name="birthday_notify_string">"Today is ${contact?.name}'s birthday"</string>
 </resources>
