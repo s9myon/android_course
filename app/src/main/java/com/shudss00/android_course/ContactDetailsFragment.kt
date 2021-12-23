@@ -1,6 +1,7 @@
 package com.shudss00.android_course
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.bumptech.glide.Glide
+import androidx.core.view.isInvisible
 import com.shudss00.android_course.databinding.FragmentContactDetailsBinding
 import java.text.SimpleDateFormat
 
@@ -44,7 +45,9 @@ class ContactDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         contactService = context as IContactService
-        contactService?.getContactById(contactId, requestResultListener)
+        contactId?.let {
+            contactService?.getContactById(it, requestResultListener)
+        }
         requireActivity().apply {
             title = getString(R.string.contact_details_toolbar_title)
         }
@@ -70,7 +73,7 @@ class ContactDetailsFragment : Fragment() {
     }
 
     interface BirthdayNotificationButtonStateListener {
-        fun getBirthdayNotificationButtonState(contact: Contact?) : Boolean
+        fun getBirthdayNotificationButtonState(contact: Contact?): Boolean
     }
 
     interface OnBirthdayNotificationButtonClick {
@@ -85,20 +88,38 @@ class ContactDetailsFragment : Fragment() {
         with(binding) {
             contact?.let {
                 textViewName.text = contact.name
-                textViewPhoneNumber.text = contact.phoneNumber
-                textViewExtraPhoneNumber.text = contact.extraPhoneNumber
-                textViewEmail.text = contact.email
-                textViewExtraEmail.text = contact.extraEmail
-                textViewDescription.text = contact.description
-                textViewDayOfBirth.text = getString(R.string.date_of_birth_title) +
-                        SimpleDateFormat("dd MMMM").format(contact.dayOfBirth.time).toString()
-                Glide.with(imageViewAvatar.context)
-                    .load(contact.img)
-                    .centerCrop()
-                    .circleCrop()
-                    .placeholder(R.drawable.ic_baseline_image_24)
-                    .into(imageViewAvatar)
-                buttonBirthdayNotify.setOnClickListener{
+                if (contact.phoneNumber != "") {
+                    textViewPhoneNumber.text =
+                        getString(R.string.phone_number_one_title) + " " + contact.phoneNumber
+                }
+                if (contact.extraPhoneNumber != "") {
+                    textViewExtraPhoneNumber.text =
+                        getString(R.string.phone_number_two_title) + " " + contact.extraPhoneNumber
+                }
+                if (contact.email != "") {
+                    textViewEmail.text = getString(R.string.email_one_title) + " " + contact.email
+                }
+                if (contact.extraEmail != "") {
+                    textViewExtraEmail.text =
+                        getString(R.string.email_two_title) + " " + contact.extraEmail
+                }
+                if (contact.description != "") {
+                    textViewDescription.text = contact.description
+                }
+                if (contact.dayOfBirth != null) {
+                    textViewDayOfBirth.text = getString(R.string.date_of_birth_title) + " " +
+                            SimpleDateFormat("dd MMMM").format(contact.dayOfBirth!!.time)
+                } else {
+                    buttonBirthdayNotify.isInvisible = true
+                }
+                if (contact.img != Uri.EMPTY) {
+                    imageViewAvatar.setImageURI(contact.img)
+                } else {
+                    imageViewAvatar.setImageResource(
+                        R.drawable.ic_baseline_image_24
+                    )
+                }
+                buttonBirthdayNotify.setOnClickListener {
                     buttonClickListener?.onBirthdayNotificationButtonClick(contact) { buttonState ->
                         if (buttonState) {
                             buttonBirthdayNotify.setText(R.string.notify_button_turn_off)

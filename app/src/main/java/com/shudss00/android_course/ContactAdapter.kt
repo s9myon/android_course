@@ -1,9 +1,9 @@
 package com.shudss00.android_course
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 
 import com.shudss00.android_course.databinding.FragmentContactBinding
 
@@ -40,14 +40,17 @@ class ContactAdapter(
             with(binding) {
                 textViewName.text = item.name
                 textViewNumber.text = item.phoneNumber
-                Glide.with(imageViewAvatar.context)
-                    .load(item.img)
-                    .centerCrop()
-                    .circleCrop()
-                    .placeholder(R.drawable.ic_baseline_image_24)
-                    .into(imageViewAvatar)
+                if (item.img != Uri.EMPTY) {
+                    imageViewAvatar.setImageURI(item.img)
+                } else {
+                    imageViewAvatar.setImageResource(
+                        R.drawable.ic_baseline_image_24
+                    )
+                }
                 constraintLayoutContactCard.setOnClickListener {
-                    listener?.onContactClick(item.id)
+                    item.id.let { id ->
+                        listener?.onContactClick(id)
+                    }
                 }
             }
         }
